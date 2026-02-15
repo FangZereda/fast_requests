@@ -95,4 +95,4 @@ O projeto demonstra na prática conceitos de Cloud DevOps, com automação, esca
 
 ---
 
-Autor: Projeto acadêmico – Cloud DevOps
+Autor: Projeto acadêmico – Cloud DevOps Guilherme Reis Bessades Barbosa
