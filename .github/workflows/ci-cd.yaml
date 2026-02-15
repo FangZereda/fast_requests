@@ -24,25 +24,25 @@ jobs:
         with:
           context: ./pedidos
           push: true
-          tags: FangZereda/pedidos:latest
+          tags: fangzereda/pedidos:latest
 
       - name: Build e push pagamentos
         uses: docker/build-push-action@v4
         with:
           context: ./pagamentos
           push: true
-          tags: FangZereda/pagamentos:latest
+          tags: fangzereda/pagamentos:latest
 
       - name: Build e push estoque
         uses: docker/build-push-action@v4
         with:
           context: ./estoque
           push: true
-          tags: FangZereda/estoque:latest
+          tags: fangzereda/estoque:latest
 
       - name: Build e push api-gateway
         uses: docker/build-push-action@v4
         with:
           context: ./api-gateway
           push: true
-          tags: FangZereda/api-gateway:latest
+          tags: fangzereda/api-gateway:latest
