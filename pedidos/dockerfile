@@ -1,0 +1,24 @@
+# Imagem
+FROM node:20-alpine
+
+# Diretório do container
+WORKDIR /app
+
+# Dependências
+COPY package*.json ./
+
+# Instala apenas produção
+RUN npm install --production
+
+# Copia restante do código
+COPY . .
+
+# Criar usuário não-root 
+RUN addgroup app && adduser -S -G app app
+USER app
+
+# Porta exposta
+EXPOSE 3000
+
+# Comando de inicialização
+CMD ["node", "index.js"]

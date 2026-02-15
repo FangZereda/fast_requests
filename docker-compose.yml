@@ -1,0 +1,70 @@
+version: '3.9'
+
+services:
+
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: teste_unifecaf15
+      MYSQL_DATABASE: request_db
+    volumes:
+      - mysqldata:/var/lib/mysql
+      - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - backend
+
+  pedidos:
+    build: ./pedidos
+    container_name: pedidos
+    restart: always
+    depends_on:
+      - mysql
+    environment:
+      DB_HOST: mysql
+      DB_USER: root
+      DB_PASSWORD: teste_unifecaf15
+      DB_NAME: request_db
+    ports:
+      - "3000:3000"
+    networks:
+      - backend
+
+  pagamentos:
+    build: ./pagamentos
+    container_name: pagamentos
+    restart: always
+    ports:
+      - "3001:3001"
+    networks:
+      - backend
+
+  estoque:
+    build: ./estoque
+    container_name: estoque
+    restart: always
+    ports:
+      - "3002:3002"
+    networks:
+      - backend
+
+  api-gateway:
+    build: ./api-gateway
+    container_name: api-gateway
+    restart: always
+    depends_on:
+      - pedidos
+      - pagamentos
+      - estoque
+    ports:
+      - "8080:8080"
+    networks:
+      - backend
+
+volumes:
+  mysqldata:
+
+networks:
+  backend:
+    driver: bridge
